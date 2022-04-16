@@ -1,3 +1,4 @@
+import os
 import random
 import urllib.request
 import hypixel
@@ -5,7 +6,11 @@ import nextcord
 import requests
 from nextcord import Member
 from nextcord.ext import commands
-from config import settings
+from dotenv import load_dotenv
+
+load_dotenv()
+token = os.environ['token']
+
 
 rand = random.Random()
 
@@ -133,4 +138,4 @@ class Colors:
     greyple = 0x99aab5
 
 
-bot.run(settings['token'])
+bot.run(token)

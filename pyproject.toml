@@ -11,6 +11,7 @@ nextcord = "^2.0.0-alpha.10"
 Flask = "^2.1.1"
 hypixel = "^0.8.0"
 requests = "^2.27.1"
+python-dotenv = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
 
