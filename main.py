@@ -5,8 +5,6 @@ import nextcord
 import requests
 from nextcord import Member
 from nextcord.ext import commands
-import os
-import subprocess
 from config import settings
 
 rand = random.Random()
