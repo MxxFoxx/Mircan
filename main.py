@@ -8,6 +8,7 @@ from nextcord import Member
 from nextcord.ext import commands
 from dotenv import load_dotenv
 
+
 load_dotenv()
 token = os.environ['token']
 
@@ -26,7 +27,7 @@ async def on_ready():
     print('Я готов!')
 
 
-@bot.command(name='server')
+@bot.command()
 async def server(ctx):
     guild = ctx.guild
     owner = guild.owner
@@ -51,20 +52,21 @@ async def random(ctx, number1, number2):
 
 @bot.command()
 async def status(ctx, ip):
-    response = requests.get('https://mcapi.xdefcon.com/server/' + ip + '/full/json')
+    response = requests.get('https://api.mcsrvstat.us/2/' + ip)
     json = response.json()
     embed = nextcord.Embed(
         title='Статистика Данного сервера',
         colour=Colors.red
     )
-    embed.add_field(name='Онлайн: ', value=str(json['players']) + '/' + str(json['maxplayers']))
-    embed.add_field(name='Мотд: ', value=json['motd']['text'])
-    embed.add_field(name='Айпи: ', value=json['serverip'])
-    embed.add_field(name='Версия: ', value=json['version'])
-    if json['serverStatus'] == 'online':
-        embed.add_field(name='Состояние: ', value='Онлайн')
-    else:
-        embed.add_field(name='Состояние: ', value='Офлайн')
+    embed.add_field(name='Онлайн: ', value=str(json['players']['online']) + '/' + str(json['players']['max']), inline=False)
+    embed.add_field(name='Мотд: ', value=json['motd']['clean'], inline=False)
+    embed.add_field(name='Буквенный Айпи: ', value=json['hostname'])
+    embed.add_field(name='Цифровой Айпи', value=json['ip'])
+    embed.add_field(name='Порт', value=json['port'])
+    embed.add_field(name='Ядро', value=json['software'], inline=False)
+    embed.add_field(name='Версия: ', value=json['version'], inline=False)
+    embed.add_field(name='Список игроков: ', value=json['players']['list'], inline=False)
+    embed.add_field(name='Иконка', value=icon)
     await ctx.send(embed=embed)
 
 
