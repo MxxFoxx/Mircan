@@ -66,7 +66,6 @@ async def status(ctx, ip):
     embed.add_field(name='Ядро', value=json['software'], inline=False)
     embed.add_field(name='Версия: ', value=json['version'], inline=False)
     embed.add_field(name='Список игроков: ', value=json['players']['list'], inline=False)
-    embed.add_field(name='Иконка', value=icon)
     await ctx.send(embed=embed)
 
 
